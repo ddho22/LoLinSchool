@@ -111,6 +111,13 @@ To perform this test, I did a hypothesis test using 0.5 as the probability of "B
 
 Below is a histogram representing the results of this hypothesis test:
 
+<iframe
+  src="Assets/hypothesis_test.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 Based on this hypothesis test, the observed *p-value is 0*, leading me to reject the null hypothesis in favor of the alternative hypothesis. The results imply that the team starting on the "Blue" side may be more likely to win a match. This suggests that the starting side may impact the result of a match, which will be used in our prediction problem.
 
 ## Framing a Prediction Problem
