@@ -10,6 +10,10 @@ MOBAs in general all follow the same basic principles. Each player on a team con
 
 The main focus of the project is to determine **if the side a team is playing on contributes to the results of a match.** The motivation behind this project is how in chess, the player starting with white is at a very minor advantage. This project serves to determine if the "side" creates a minor advantage for players, similarly to chess.
 
+Author: Darren Ho
+
+*Note: League of Legends and subsequently "LoL" will represent its mobile counterpart League of Legends Wild Rift*
+
 ### Data information
 
 The underlying data will come from Tim Sevenhuysen's aggregated 2022 Professional LoL Esports data set on Oracle Elixir. The data set contains over 150,000 entries and 161 features. The features are very exhaustive and not all features are relevant to this project. The relevant features are as follows:
@@ -30,4 +34,57 @@ The underlying data will come from Tim Sevenhuysen's aggregated 2022 Professiona
 
 ## Data Cleaning and Exploratory Data Analysis
 
-# Data Cleaning
+### Data Cleaning
+
+1. Given that my focus is at the team level, I selected only rows where the "position" was "team". This reduced the number of rows to just over 25,000.
+
+2. To reduce the time and resources required in further steps, I selected only the relevant columns (position, side, result, kills, deaths, assists, and totalgold) mentioned above.
+
+The resulting dataset has 25,030 rows and 6 columns. Furthemore, no data was missing in any of the columns.
+
+Below is the head of the cleaned data frame that will be used for hypothesis testing and the prediction model:
+
+### Univariate Analysis
+I performed a univariate analysis of the total kills on a team. The resulting histogram is embeded below:
+
+
+The distribution seems to be bimodal, however the Bivariate Analysis explains the cause for this seemingly bimodal distribution.
+
+
+### Bivariate Analysis
+To explore the bimodal distribution from Univariate Analysis, I created conditional distrubtions of "kills" on "result"
+
+The resulting distributions are almost normally distributed, being slightly right skewed. This suggests that kills, conditional on results, are distributed in a balanced manner. According to these distriutions, the distribution of kills for the team that won is to the right of the distribution of kills for the team that won. This is to be expected as higher kills are typically associated with winning a game.
+
+I also performed a Bivariate Analysis of "result" conditioned on "side". The resulting plot is below:
+
+Based on the resulting plot, the team on the "Blue" side won nearly 5% more of the games than the "Red" side. This suggests that "side" may impact "resuult". This relationship will be further explored in later sections.
+
+### Interesting Aggregates
+Here is an interesting aggregate that I found:
+
+
+
+Upon aggregating based on "result" I found that the winning team had 109% more kills and 122% more assits. However, the difference in the mean total gold was only ~20%. This suggests that the winning team is not as advantaged in gold as I would have expected, and that "totalgold" does not differ as much as kills and assists do. Furthermore, the difference between the increase in kills is less than the increase in assists, conditional on result. This suggests that wining teams fought better as a team than losing teams and one person did not individual outperform the rest of their team by a larger margin than the respective individual on the losing team.
+
+## Assessment of Missingness
+
+## Hypothesis Testing
+The purpose of this hypothesis test is to determine if the blue team is statistically more likely to win or if the observed difference can be explained by random chance. This test is neccessary to determine if "side" will be a viable feature for determining the results of a game.
+
+**Null Hypothesis:** The proportion of wins belonging to teams starting on the "Blue" side are the same as "Red". 
+
+**Alterantive Hypothesis:** The proportion of wins belonging to teams starting on the "Blue" side are greater than those starting on the "Red" side.
+
+**Test Statistic:** Proportion wins belonging to teams starting on the "Blue" side.
+
+**Significance Level:** 10%
+
+To perform this test, I did a hypothesis test using 0.5 as the probability of "Blue" winning. The probability is set to 0.5 as the null hypothesis states that the proportions of wins of "Red" and "Blue" winning are the same. The test statistic of proportions of wins belonging to "Blue" side is a valid test statistic as I am testing only the proportion of wins from "Blue" and not from red. 
+
+Below is a histogram representing the results of this hypothesis test:
+
+Based on this hypothesis test, the observed *p-value is 0*, leading me to reject the null hypothesis in favor of the alternative hypothesis. The results imply that the team starting on the "Blue" side may be more likely to win a match. This suggests that the starting side may impact the result of a match, which will be used in our prediction problem.
+
+## Framing a Prediction Problem
+From the hypothesis test, I found that there may exists a correlation between "side" and "result". Building off of this concept, is it possible to predict whether or not a team won given their stats? 
