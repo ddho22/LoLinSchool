@@ -48,7 +48,7 @@ Below is the head of the cleaned data frame that will be used for hypothesis tes
 I performed a univariate analysis of the total kills on a team. The resulting histogram is embeded below:
 
 <iframe
-  src="assets/kills_distribution.html"
+  src="Assets/kills_distribution.html"
   width="800"
   height="600"
   frameborder="0"
@@ -61,14 +61,14 @@ The distribution seems to be bimodal, however the Bivariate Analysis explains th
 To explore the bimodal distribution from Univariate Analysis, I created conditional distrubtions of "kills" on "result":
 
 <iframe
-  src="assets/winner_kills_distribution.html"
+  src="Assets/winner_kills_distribution.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
 
 <iframe
-  src="assets/loser_kills_distribution.html"
+  src="Assets/loser_kills_distribution.html"
   width="800"
   height="600"
   frameborder="0"
@@ -79,7 +79,7 @@ The resulting distributions are almost normally distributed, being slightly righ
 I also performed a Bivariate Analysis of "result" conditioned on "side". The resulting plot is below:
 
 <iframe
-  src="assets/wins_by_side.html"
+  src="Assets/wins_by_side.html"
   width="800"
   height="600"
   frameborder="0"
