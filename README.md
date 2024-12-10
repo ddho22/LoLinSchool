@@ -47,16 +47,43 @@ Below is the head of the cleaned data frame that will be used for hypothesis tes
 ### Univariate Analysis
 I performed a univariate analysis of the total kills on a team. The resulting histogram is embeded below:
 
+<iframe
+  src="assets/kills_distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 The distribution seems to be bimodal, however the Bivariate Analysis explains the cause for this seemingly bimodal distribution.
 
 
 ### Bivariate Analysis
-To explore the bimodal distribution from Univariate Analysis, I created conditional distrubtions of "kills" on "result"
+To explore the bimodal distribution from Univariate Analysis, I created conditional distrubtions of "kills" on "result":
+
+<iframe
+  src="assets/winner_kills_distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+<iframe
+  src="assets/loser_kills_distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 The resulting distributions are almost normally distributed, being slightly right skewed. This suggests that kills, conditional on results, are distributed in a balanced manner. According to these distriutions, the distribution of kills for the team that won is to the right of the distribution of kills for the team that won. This is to be expected as higher kills are typically associated with winning a game.
 
 I also performed a Bivariate Analysis of "result" conditioned on "side". The resulting plot is below:
+
+<iframe
+  src="assets/wins_by_side.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 Based on the resulting plot, the team on the "Blue" side won nearly 5% more of the games than the "Red" side. This suggests that "side" may impact "resuult". This relationship will be further explored in later sections.
 
