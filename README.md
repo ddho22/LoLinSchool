@@ -87,4 +87,15 @@ Below is a histogram representing the results of this hypothesis test:
 Based on this hypothesis test, the observed *p-value is 0*, leading me to reject the null hypothesis in favor of the alternative hypothesis. The results imply that the team starting on the "Blue" side may be more likely to win a match. This suggests that the starting side may impact the result of a match, which will be used in our prediction problem.
 
 ## Framing a Prediction Problem
-From the hypothesis test, I found that there may exists a correlation between "side" and "result". Building off of this concept, is it possible to predict whether or not a team won given their stats? 
+From the hypothesis test, I found that there may exists a correlation between "side" and "result". However, there are likely several other columns where such a correlation with "result" eixists. As such, I would like to build a model on the Prediction Problem: *Can a team's outcome in a match be determined by their in-game statistics? *
+
+The foundational principles of this model is a **binary classification**, determining between whether or not a team won or lost. The response variable will be the **"result"** of a match. To do this, I had to encode the "result" values using Binarizer. I chose to predict the result of a match because it is the most interesting to me to see if it is possible to predict a winner based on data alone. Or in other words, is there a pattern to winning statistics?
+
+The metric that I am using is accuracy because the data is even distributed, with there being the same number of winning teams as losing teams in the dataset. I am not using precision nor recall as there is no true positive that I am trying to predict and care about both of the predicted values.
+
+At the time of prediction, the only information that is available are the team's: **kills, deaths, assists, totalgold, and starting side.** These statistics were generated throughout the duration fo the game and will be used to train a Baseline and Final Model.
+
+## Baseline Model
+The Baseline Model is a RandomForestClassifier, with the default parameters. The features used to train teh first model are "kills" and "side". The only preprocessing that was done was to use Binarizer to encode the "side" column. 
+
+To train the model, I split the data into 
