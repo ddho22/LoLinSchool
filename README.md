@@ -14,4 +14,4 @@ The main focus of the project is on determining the degree of impact that the st
 
 The underlying data will come from Tim Sevenhuysen's aggregated 2022 Professional LoL Esports data set on Oracle Elixir. The data set contains over 150,000 entries and 161 features. The features are very exhaustive and not all features are relevant to this project. The relevant features are as follows:
 
-- 'side'
+- `**side**`
