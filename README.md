@@ -165,7 +165,7 @@ Below is a histogram representing the results of this hypothesis test:
 Based on this hypothesis test, the observed *p-value is 0*, leading me to reject the null hypothesis in favor of the alternative hypothesis. The results imply that the team starting on the "Blue" side may be more likely to win a match. This suggests that the starting side may impact the result of a match, which will be used in our prediction problem.
 
 ## Framing a Prediction Problem
-From the hypothesis test, I found that there may exists a correlation between "side" and "result". However, there are likely several other columns where such a correlation with "result" eixists. As such, I would like to build a model on the Prediction Problem: *Can a team's outcome in a match be determined by their in-game statistics? *
+From the hypothesis test, I found that there may exists a correlation between "side" and "result". However, there are likely several other columns where such a correlation with "result" eixists. As such, I would like to build a model on the Prediction Problem: *Can a team's outcome in a match be determined by their in-game statistics?*
 
 The foundational principles of this model is a **binary classification**, determining between whether or not a team won or lost. The response variable will be the **"result"** of a match. To do this, I had to encode the "result" values using Binarizer. I chose to predict the result of a match because it is the most interesting to me to see if it is possible to predict a winner based on data alone. Or in other words, is there a pattern to winning statistics?
 
