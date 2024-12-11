@@ -43,6 +43,13 @@ The underlying data will come from Tim Sevenhuysen's aggregated 2022 Professiona
 The resulting dataset has 25,030 rows and 6 columns. Furthemore, no data was missing in any of the columns.
 
 Below is the head of the cleaned data frame that will be used for hypothesis testing and the prediction model:
+| side   | result   |   kills |   deaths |   assists |   totalgold |
+|:-------|:---------|--------:|---------:|----------:|------------:|
+| Blue   | False    |       9 |       19 |        19 |       47070 |
+| Red    | True     |      19 |        9 |        62 |       52617 |
+| Blue   | False    |       3 |       16 |         7 |       57629 |
+| Red    | True     |      16 |        3 |        39 |       71004 |
+| Blue   | True     |      13 |        6 |        35 |       45468 |
 
 ### Univariate Analysis
 I performed a univariate analysis of the total kills on a team. The resulting histogram is embeded below:
