@@ -43,6 +43,7 @@ The underlying data will come from Tim Sevenhuysen's aggregated 2022 Professiona
 The resulting dataset has 25,030 rows and 6 columns. Furthemore, no data was missing in any of the columns.
 
 Below is the head of the cleaned data frame that will be used for hypothesis testing and the prediction model:
+
 | side   | result   |   kills |   deaths |   assists |   totalgold |
 |:-------|:---------|--------:|---------:|----------:|------------:|
 | Blue   | False    |       9 |       19 |        19 |       47070 |
@@ -167,7 +168,19 @@ The metric that I am using is accuracy because the data is even distributed, wit
 At the time of prediction, the only information that is available are the team's: **kills, deaths, assists, totalgold, and starting side.** These statistics were generated throughout the duration fo the game and will be used to train a Baseline and Final Model.
 
 ## Baseline Model
-The Baseline Model is a **RandomForestClassifier**, with the default parameters. The features used to train teh first model are "kills" and "side". The only preprocessing that was done was to use Binarizer to encode the "side" column. 
+The Baseline Model is a **RandomForestClassifier**, with the default parameters. The features used to train teh first model are "kills" and "side". The only preprocessing that was done was to use Binarizer to encode the "side" column. The "kills" feature is a quantitative discrete feature. My rationale for the features are below:
+
+- `kills`: Kills are the default metric used to determine performance across many different video games. I extended this idea to LoL and decided to include it in my BaseLine Model.
+
+- `side`: As a result of the hypothesis test, I decided to include it as a factor in my BaseLine model. From the hypothesis test, I concluded that "side" may have an impact on the result of a match.
+
+|   kills | side   |
+|--------:|:-------|
+|      21 | False  |
+|       3 | True   |
+|       7 | False  |
+|      21 | False  |
+|      13 | True   |
 
 To train the model, I split the data into a training and a testing split. The testing split contained 20% of the entries, while the training split contained 80% of the entries. Since this is my baseline model, I did not fine tune any of the hyper parameters belonging to the RandomForestClassifier.
 
@@ -176,7 +189,21 @@ After fiting my model using the training split, my model had an accuracy of *83.
 Further optimization of this model would mainly focus on the fine tuning of hyper parameters and the addition of more features
 
 ## Final Model
-The final model included three new features "deaths", "assists", and "totalgold". I originally did not include these features as I believed that the "kills" feature would encompass these features, given kills are the most commonly associated statistic with performance. These features were selected out of all other features because they are all indicators of performance and would likely help to determine the performance of a team.
+The final model included three new features "deaths", "assists", and "totalgold". I originally did not include these features as I believed that the "kills" feature would encompass these features, given kills are the most commonly associated statistic with performance. All of these features are discrete numerical features. My rationale for including these features is below:
+
+- `deaths`: Improves my model by complimenting the "kill" feature. The inclusion of deaths will help to normalize the impact of kills to be more relative to the match they were in. For example, a team that had 20 kills and 30 deaths did "worse" and is more likely to have lost than a team with 15 kills but only 5 deaths.
+
+- `assists`: This feature will help to incorporate an aspect of teamwork into the model. A team that had more assists likely worked together more as a team than a counterpart with lower assists.
+
+- `totalgold`: This feature will help to account for factors outside of player vs player interactions, such as minion interactions. Minion and monster interactions are an essential part of the LoL gameplay experience and should be accounted for.
+
+|   kills | side   |   deaths |   assists |   totalgold |
+|--------:|:-------|---------:|----------:|------------:|
+|      10 | True   |        2 |        30 |       75954 |
+|      15 | False  |       21 |        29 |       62789 |
+|      30 | True   |       12 |        66 |       64718 |
+|      11 | True   |       23 |        30 |       47907 |
+|      20 | True   |       26 |        42 |       58642 |
 
 To tune the hyperparamenters, I used GridSearchCV on my RandomForestClassifier to tune the hyperparameters: n_estimators, max_depth, and min_samples_split. For the K-fold cross validation parameter, I used 3 folds.
 - n_estimators: Tested values from 5 to 30 with a step size of 5. Best parameter = 25
