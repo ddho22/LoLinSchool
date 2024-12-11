@@ -34,8 +34,6 @@ The underlying data will come from Tim Sevenhuysen's aggregated 2022 Professiona
 
 ## Data Cleaning and Exploratory Data Analysis
 
-#
-
 ### Data Cleaning
 
 1. Given that my focus is at the team level, I selected only rows where the "position" was "team". This reduced the number of rows to just over 25,000.
@@ -97,6 +95,32 @@ Here is an interesting aggregate that I found:
 Upon aggregating based on "result" I found that the winning team had 109% more kills and 122% more assits. However, the difference in the mean total gold was only ~20%. This suggests that the winning team is not as advantaged in gold as I would have expected, and that "totalgold" does not differ as much as kills and assists do. Furthermore, the difference between the increase in kills is less than the increase in assists, conditional on result. This suggests that wining teams fought better as a team than losing teams and one person did not individual outperform the rest of their team by a larger margin than the respective individual on the losing team.
 
 ## Assessment of Missingness
+
+### NMAR Analysis
+
+### Missingness Dependency
+This part aims to test if the missingness of the "firstdragon" column is dependent on "game". The motivation behind this test of Missingness Dependency stems from my initial draft of this project. I originally intended to use "firstdragon" as one of my features, however, I decided not to include it due to many missing values and a general lack of significance in my model.
+
+To determine if the missingness of "firstdragon" is dependent on "game", I did a permuation test on "firstdragon" and "game":
+
+**Null Hypothesis:** The distribution of "game" conditioned on the missingness of "firstdragon" is the same for both when "firstdragon" is missing and present.
+
+**Alternative Hypothesis:** The distribution of "game" conditioned on the missingness of "firstdragon" is different when "firstdragon" is missing and present.
+
+**Test Statistic:** Total Variation Distance
+
+**Significance Level:** 0.1
+
+The distribution of the permuation test is below:
+
+<iframe
+  src="Assets/missingness_test.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+After performing the permutation test, the resulting p-value was 0, rejecting the null hypothesis in favor of the alternative. The results of this permuation test suggest that the missingness of "firstdragon" may be dependent on "game".
 
 ## Hypothesis Testing
 The purpose of this hypothesis test is to determine if the blue team is statistically more likely to win or if the observed difference can be explained by random chance. This test is neccessary to determine if "side" will be a viable feature for determining the results of a game.
@@ -160,6 +184,8 @@ To test this claim, I performed a permutation test with the following hypothesis
 **Alternative Hypothesis:** My model is unfair and a team with less than 15 kills is more likely to predict false negatives (losing the match when theny won) than a team with at least 15 kills.
 
 **Test Statistic:** Difference in recall between teams with at least 15 kills and teams with less than 15 kills.
+
+**Significance Level:** 10%
 
 For this test, I chose the difference in recall as my test statistic because I want to see if my model is more likely to incorrectly predict that a team loss a match given they actually won conditioned on a low kill count.
 
