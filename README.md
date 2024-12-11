@@ -130,6 +130,39 @@ The metric that I am using is accuracy because the data is even distributed, wit
 At the time of prediction, the only information that is available are the team's: **kills, deaths, assists, totalgold, and starting side.** These statistics were generated throughout the duration fo the game and will be used to train a Baseline and Final Model.
 
 ## Baseline Model
-The Baseline Model is a RandomForestClassifier, with the default parameters. The features used to train teh first model are "kills" and "side". The only preprocessing that was done was to use Binarizer to encode the "side" column. 
+The Baseline Model is a **RandomForestClassifier**, with the default parameters. The features used to train teh first model are "kills" and "side". The only preprocessing that was done was to use Binarizer to encode the "side" column. 
 
-To train the model, I split the data into 
+To train the model, I split the data into a training and a testing split. The testing split contained 20% of the entries, while the training split contained 80% of the entries. Since this is my baseline model, I did not fine tune any of the hyper parameters belonging to the RandomForestClassifier.
+
+After fiting my model using the training split, my model had an accuracy of *83.7%* when tested on the test split. Furthermore, it had a precision score of *.88*, indicating that there are not many false positives resulting from the dataset.
+
+Further optimization of this model would mainly focus on the fine tuning of hyper parameters and the addition of more features
+
+## Final Model
+The final model included three new features "deaths", "assists", and "totalgold". I originally did not include these features as I believed that the "kills" feature would encompass these features, given kills are the most commonly associated statistic with performance. These features were selected out of all other features because they are all indicators of performance and would likely help to determine the performance of a team.
+
+To tune the hyperparamenters, I used GridSearchCV on my RandomForestClassifier to tune the hyperparameters: n_estimators, max_depth, and min_samples_split. For the K-fold cross validation parameter, I used 3 folds.
+- n_estimators: Tested values from 5 to 30 with a step size of 5. Best parameter = 25
+- max_depth: Tested values from 2 to 8 with a step size of 2. Best parameter = 6
+- min_samples_split: Tested values from 5 to 30 with a step size of 5. Best parameter = 10
+
+The accuracy of my final model are all *95%*. This indicates that my model is able to correctly determine whether a team won or loss a match 95% of the time. Furthermore, my precision increased to *0.95*. This increase in performance suggests that the inclusion of the new features and the fine tuning of hyperparameters increased the effectivity of my model.
+
+## Fairness Analysis
+This section aims to determine if the model performs worse for teams with lower kill counts. Specifically, I will be testing if my model **performs worse for a team with less than 15 kills in a game than a team with at least 15 kills**.
+
+To test this claim, I performed a permutation test with the following hypothesis:
+
+**Null Hypothesis:** My model is fair and performs equaly as well for a team with less than 15 kills in a game as a team with at least 15 kills.
+
+**Alternative Hypothesis:** My model is unfair and a team with less than 15 kills is more likely to predict false negatives (losing the match when theny won) than a team with at least 15 kills.
+
+**Test Statistic:** Difference in recall between teams with at least 15 kills and teams with less than 15 kills.
+
+For this test, I chose the difference in recall as my test statistic because I want to see if my model is more likely to incorrectly predict that a team loss a match given they actually won conditioned on a low kill count.
+
+Upon performing this permutation test, the resulting p-value that I got was 0, resulting in me rejecting the null hypothesis in favor of the alternative. This result suggests that my model is unfair towards teams with lower kill counts.
+
+Since my model may be unfair, it is important to consider the ethical consequences behind using "kills" as a feature in my model. The question that I asked myself was: **Is it fair to predict with higher frequency that a team lost a match although they won, given they had a lower amount of kills?** 
+
+The conclusion that I arrived at was that it is fair to predict with higher frequency that a team lost a match despite winning as a result of lower kill counts because based on the distributions found in the Univariate and Bivariate Analysis sections, teams that lost had distributions that were shifted to the left of teams that won.
