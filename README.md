@@ -108,7 +108,13 @@ Upon aggregating based on "result" I found that the winning team had 109% more k
 ## Assessment of Missingness
 
 ### NMAR Analysis
+After analyzing the dataset, I have determined that the columns "ban1", "ban2", "ban3", "ban4", and "ban5" are all NMAR. I determined that these columns are NMAR because bans in LoL wild rift are not mandatory. The missing values would indicate that a player/team decided not to ban a champion in that game. 
 
+While there are general minimal disadvantages to banning a champion, teams may decide to not ban a champion if they have the first pick when drafting their team. To select your champion in LoL, teams participate in a draft, where champion selection alternates between the two teams. A circumstance where a team may not want to ban a champion would be if they have the first pick in the draft and they do not want to close any of their options. By not banning a champion they give themselves an opportunity to pick a potentially strong champion (assuming the other team doesn't ban it). This may motivate a player/team to not ban anything, resulting in misisng enteries the aforementioned columns.
+
+There are other circumstances as well that may drive a player/team to not ban a champion, such as wanting to practice against unfavorable matchups, or simply wanting to show off. 
+
+Since the missingness depends on the actual choice to not ban anything, the aforementioned columns are NMAR. A data point that I may want to obtain is a binary "draftfirstpick" column. Although not guaranteed, based on my prior reasoning, there may be a relationship between the missingness of the ban columns and having the first pick in a draft.
 
 ### Missingness Dependency
 This part aims to test if the missingness of the "firstdragon" column is dependent on "game". The motivation behind this test of Missingness Dependency stems from my initial draft of this project. I originally intended to use "firstdragon" as one of my features, however, I decided not to include it due to many missing values and a general lack of significance in my model.
