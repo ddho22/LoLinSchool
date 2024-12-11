@@ -97,13 +97,17 @@ Based on the resulting plot, the team on the "Blue" side won nearly 5% more of t
 ### Interesting Aggregates
 Here is an interesting aggregate that I found:
 
-
+|    kills |   deaths |   assists |   totalgold |
+|---------:|---------:|----------:|------------:|
+|  9.36828 | 19.6296  |   20.0756 |     51925.3 |
+| 19.6094  |  9.40591 |   44.5901 |     61908.4 |
 
 Upon aggregating based on "result" I found that the winning team had 109% more kills and 122% more assits. However, the difference in the mean total gold was only ~20%. This suggests that the winning team is not as advantaged in gold as I would have expected, and that "totalgold" does not differ as much as kills and assists do. Furthermore, the difference between the increase in kills is less than the increase in assists, conditional on result. This suggests that wining teams fought better as a team than losing teams and one person did not individual outperform the rest of their team by a larger margin than the respective individual on the losing team.
 
 ## Assessment of Missingness
 
 ### NMAR Analysis
+
 
 ### Missingness Dependency
 This part aims to test if the missingness of the "firstdragon" column is dependent on "game". The motivation behind this test of Missingness Dependency stems from my initial draft of this project. I originally intended to use "firstdragon" as one of my features, however, I decided not to include it due to many missing values and a general lack of significance in my model.
