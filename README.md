@@ -169,9 +169,9 @@ From the hypothesis test, I found that there may exists a correlation between "s
 
 The foundational principles of this model is a **binary classification**, determining between whether or not a team won or lost. The response variable will be the **"result"** of a match. To do this, I had to encode the "result" values using Binarizer. I chose to predict the result of a match because it is the most interesting to me to see if it is possible to predict a winner based on data alone. Or in other words, is there a pattern to winning statistics?
 
-The metric that I am using is accuracy because the data is even distributed, with there being the same number of winning teams as losing teams in the dataset. I am not using precision nor recall as there is no true positive that I am trying to predict and care about both of the predicted values.
+The metrics that I am using are accuracy and recall because the data is even distributed, with there being the same number of winning teams as losing teams in the dataset.
 
-At the time of prediction, the only information that is available are the team's: **kills, deaths, assists, totalgold, and starting side.** These statistics were generated throughout the duration fo the game and will be used to train a Baseline and Final Model.
+At the time of prediction, the only information that is available are the team's: **kills, deaths, assists, totalgold, and starting side.** These statistics were generated throughout the duration of the game and will be used to train a Baseline and Final Model.
 
 ## Baseline Model
 The Baseline Model is a **RandomForestClassifier**, with the default parameters. The features used to train teh first model are "kills" and "side". The only preprocessing that was done was to use Binarizer to encode the "side" column. The "kills" feature is a quantitative discrete feature. My rationale for the features are below:
@@ -192,7 +192,7 @@ To train the model, I split the data into a training and a testing split. The te
 
 After fiting my model using the training split, my model had an accuracy of *83.7%* when tested on the test split. Furthermore, it had a precision score of *.88*, indicating that there are not many false positives resulting from the dataset.
 
-Further optimization of this model would mainly focus on the fine tuning of hyper parameters and the addition of more features
+Given the context of my model, I do believe that it is functional, however, I do not believe that it is *good* and will optimize it. Further optimization of this model would mainly focus on the fine tuning of hyper parameters and the addition of more features
 
 ## Final Model
 The final model included three new features "deaths", "assists", and "totalgold". I originally did not include these features as I believed that the "kills" feature would encompass these features, given kills are the most commonly associated statistic with performance. All of these features are discrete numerical features. My rationale for including these features is below:
