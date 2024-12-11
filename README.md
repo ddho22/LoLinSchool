@@ -238,3 +238,10 @@ Upon performing this permutation test, the resulting p-value that I got was 0, r
 Since my model may be unfair, it is important to consider the ethical consequences behind using "kills" as a feature in my model. The question that I asked myself was: **Is it fair to predict with higher frequency that a team lost a match although they won, given they had a lower amount of kills?** 
 
 The conclusion that I arrived at was that it is fair to predict with higher frequency that a team lost a match despite winning as a result of lower kill counts because based on the distributions found in the Univariate and Bivariate Analysis sections, teams that lost had distributions that were shifted to the left of teams that won.
+
+<iframe
+  src="Assets/fairness.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
