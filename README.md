@@ -34,6 +34,8 @@ The underlying data will come from Tim Sevenhuysen's aggregated 2022 Professiona
 
 ## Data Cleaning and Exploratory Data Analysis
 
+#
+
 ### Data Cleaning
 
 1. Given that my focus is at the team level, I selected only rows where the "position" was "team". This reduced the number of rows to just over 25,000.
